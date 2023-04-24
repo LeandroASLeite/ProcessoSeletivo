@@ -97,6 +97,9 @@
   display: flex;
   justify-content: space-between;
 }
+.botao-criar{
+  margin-bottom: 10px;
+}
 
 /* parte da tabela */
 
@@ -189,10 +192,10 @@ form label,form h1{
   color: white;
 }
 
-button[type='submit'] {
-  width: 100px;
+button[type='default'] {
+  width: 100px !important;
   padding: 10px;
-  background-color:rgb(31, 106, 245);
+  background-color: rgb(31, 106, 245);
   color: #fff;
   border: none;
   border-radius: 10px;
@@ -202,6 +205,8 @@ button[type='submit'] {
 button[type='submit']:hover{
   background-color: rgb(4, 50, 134);
 }
+
+
 
 @media (min-width: 768px) {
   button[type='submit'] {
