@@ -128,7 +128,7 @@ function TaskForm() {
         />
       </div>
 
-      <button type="submit">Criar tarefa</button>
+      <button type="default">Criar tarefa</button>
     </form>
     
   );

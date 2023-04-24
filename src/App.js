@@ -194,8 +194,9 @@ class Calendario extends Component {
 
             <div className='Sidebar'>
             <label>Calendário</label>
-            <button onClick={()=> {this.handleOpen()}}>Criar</button>
-          
+            <div className='botao-criar'>
+            <button type='default' onClick={()=> {this.handleOpen()}}>Criar</button>
+            </div>
             <div className='alterar-data'>
             <label>{this.meses[this.state.mes]}</label>
             <ul className='mes' >
