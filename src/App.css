@@ -1,0 +1,210 @@
+*{
+  margin: 0;
+  padding: 0;
+}
+/* parte da Topbar */
+.Topbar{
+  background-color: cornflowerblue;
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  align-items: center;
+  
+}
+.agenda{
+  display: flex;
+  margin-top: 10px;
+  margin-left: 20px;
+  align-items: center;
+  margin-bottom: 10px;
+}
+.alterar-dia{
+  display: flex;
+  
+}
+.data-atual label{
+  margin-bottom: 0;
+  font-weight: bold;
+}
+.Topbar svg{
+  font-size: 2em;
+  
+}
+.left{
+  justify-content: left;
+}
+.dias{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  list-style: none;
+}
+.dias li{
+  margin: 0 1em;
+}
+.dias svg{
+  font-size: 1.5em;
+  cursor: pointer;
+}
+
+.Corpo{
+  display: flex;
+  height: 100vh;
+  width: 100%;
+  border-top: 1px solid black;
+}
+.Sidebar{
+  border-right: 1px solid black;
+  text-align: center;
+  width: auto;
+ 
+}
+.tabela{
+  width: 100%;
+  height: 100%;
+  display: flex;
+  
+ 
+}
+/* parte da sidebar */
+.mes{
+  display: flex;
+  justify-content: left;
+  list-style: none;
+}
+.mes li{
+  margin: 0 1em;
+}
+.mes svg{
+  font-size: 1em;
+  cursor: pointer;
+}
+
+.ano{
+  display: flex;
+  justify-content: left;
+  list-style: none;
+}
+.ano li{
+  margin: 0 1em;
+}
+.ano svg{
+  font-size: 1em;
+  cursor: pointer;
+}
+
+.alterar-data{
+  display: flex;
+  justify-content: space-between;
+}
+
+/* parte da tabela */
+
+.horas{
+
+  border-right: 1px solid black;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  width: 15%;
+}
+.eventos{
+  border-right: 1px solid black;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  width: 85%;
+}
+.evento{
+  margin-left: 20px;
+  }
+  
+  .td0 {
+    border: 1px solid black;
+  }
+  
+  .tr0:first-child td {
+    border-bottom: 2px solid black;
+  }
+  
+  .td0:first-child {
+    border-right: 2px solid black;
+  }
+  .linhas{
+    border-bottom: 1px solid black;
+    height: 24%;
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: center;
+    align-items: center;
+  }
+
+/* estilização do formulário de criar eventos */
+form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  max-width: 40rem;
+  margin: auto;
+  justify-content: space-between;
+  min-width: 300px;
+  background-color: cornflowerblue;
+}
+
+
+ @media (min-width: 768px) {
+  form {
+    flex-direction: column;
+    flex-wrap: wrap;
+    justify-content: space-between;
+  }
+
+  form > * {
+    flex: 0 0 calc(50% - 0.5rem);
+  }
+}
+
+label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: bold;
+}
+
+input[type='text'],
+input[type='date'],
+input[type='time'],
+textarea {
+  outline: unset;
+  width: 300px;
+  padding: 10px;
+  border: 1px solid cornflowerblue;
+  border-radius: 10px;
+  
+}
+textarea:focus,input:focus{
+  background-color: rgb(219, 228, 245);
+}
+form label,form h1{
+  color: white;
+}
+
+button[type='submit'] {
+  width: 100px;
+  padding: 10px;
+  background-color:rgb(31, 106, 245);
+  color: #fff;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  
+}
+button[type='submit']:hover{
+  background-color: rgb(4, 50, 134);
+}
+
+@media (min-width: 768px) {
+  button[type='submit'] {
+    width: auto;
+  }
+}
