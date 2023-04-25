@@ -16,16 +16,17 @@ class Calendario extends Component {
       this.state = {
       mes: data.getMonth(),
       ano: data.getFullYear(),
+      //pega dia atual
       dia: data.getDate(),
       dialog: false
     
     };
     this.meses = ["Janeiro","Fevereiro","Março","Abril","Maio","Junho","Julho","Agosto","Setembro","Outubro","Novembro","Dezembro"];
-    console.log(this.state)
+    
 }
 
   selecionarDia(event){
-    //console.log(event.target.textContent)
+    
     
       setTimeout(()=>{this.diaSelecionado = parseInt(event.target.textContent);
         console.log(this.diaSelecionado)},2000)
@@ -87,58 +88,91 @@ class Calendario extends Component {
     );
   }
   AtualizaData(tipo,operacao){
-    if (tipo === "mes"){  
-
-        if (operacao === "soma"){
-            if (this.state.mes <11){                    
-                this.setState({
-                    mes: this.state.mes + 1,
-                    ano: this.state.ano,    
-                })
-            }
-            else{
-            
-                this.setState({
-                    mes: 0,
-                    ano: this.state.ano + 1,    
-                })
-            }
-        
-        }
-        else{
-            //subtrai
-            if (this.state.mes >0){                    
-                this.setState({
-                    mes: this.state.mes - 1,
-                    ano: this.state.ano,    
-                })
-                }       
-            else{ 
-            
-                this.setState({
-                    mes: 11,
-                    ano: this.state.ano - 1,    
-                })
-
-            }
-
-        }
+    let diasNoMes = new Date(this.state.ano, this.state.mes + 1, 0).getDate();
+//soma
+if (operacao === "soma"){
+  if (tipo ==="mes"){
+    if (this.state.mes <11){                    
+        this.setState({
+            mes: this.state.mes + 1,
+            ano: this.state.ano,    
+        })
     }
-    //ano
-    else if (tipo==="ano"){
-
-        if (operacao === "soma"){
-            this.setState({
-                mes: this.state.mes,
-                ano: this.state.ano +1})
-        }
-        else{
-                this.setState({
-                    mes: this.state.mes,
-                    ano: this.state.ano -1})
-        }
+    else{
+    
+        this.setState({
+            mes: 0,
+            ano: this.state.ano + 1,    
+        })
     }
   }
+  else if (tipo ==="ano"){     
+    this.setState({
+    mes: this.state.mes,
+    ano: this.state.ano +1})       
+  }
+  else{
+    if (this.state.dia <diasNoMes){                    
+      this.setState({
+          dia: this.state.dia + 1,
+             
+      })
+    } 
+    else{
+      this.setState({
+        dia: 1,
+        mes: this.state.mes +1    
+    })
+    }
+
+  }
+}
+//subtrai
+if (operacao === "subtrai"){
+  if (tipo ==="mes"){
+    if (this.state.mes >0){                    
+        this.setState({
+            mes: this.state.mes - 1,
+            ano: this.state.ano,    
+        })
+    }
+    else{
+    //não está mudando de ano
+        this.setState({
+            mes: 11,
+            ano: this.state.ano - 1,    
+        })
+    }
+  }
+  else if (tipo ==="ano"){     
+    this.setState({
+    mes: this.state.mes,
+    ano: this.state.ano -1})       
+  }
+  else{
+    if (this.state.dia >1){                    
+      this.setState({
+          dia: this.state.dia - 1,
+             
+      })
+    } 
+    else{
+      this.setState({
+        mes: this.state.mes -1
+        })
+        
+        
+     diasNoMes = new Date(this.state.ano, this.state.mes, 0).getDate();
+      this.setState({
+        dia: diasNoMes   
+      })
+      
+    }
+    
+    
+  }
+}
+}
 
   TabelaEventos(parametro){
     return(
@@ -182,8 +216,8 @@ class Calendario extends Component {
             </div>
             <div className='alterar-dia'>    
                 <ul className='dias'>                  
-                  <li id='Dia Anterior' title='Dia anterior'><TfiAngleLeft/></li>
-                  <li id='Proximo dia'title='Próximo dia'><TfiAngleRight/></li>
+                  <li id='Dia Anterior' title='Dia anterior' onClick={() => this.AtualizaData("dia","subtrai")}><TfiAngleLeft/></li>
+                  <li id='Proximo dia'title='Próximo dia'onClick={() => this.AtualizaData("dia","soma")}><TfiAngleRight/></li>
                   <li><button >Hoje</button></li>
                   </ul>
             </div>
@@ -202,7 +236,7 @@ class Calendario extends Component {
             <div className='alterar-data'>
             <label>{this.meses[this.state.mes]}</label>
             <ul className='mes' >
-              <li id='mes anterior' title='Mês anterior' onClick={() => this.AtualizaData("mes","subtracao")}><TfiAngleLeft/></li>
+              <li id='mes anterior' title='Mês anterior' onClick={() => this.AtualizaData("mes","subtrai")}><TfiAngleLeft/></li>
               <li id='proximo mes' title='Próximo mês' onClick={() => this.AtualizaData("mes","soma")}><TfiAngleRight/></li>
             </ul>
             </div>
