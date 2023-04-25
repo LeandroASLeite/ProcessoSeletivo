@@ -6,7 +6,6 @@
 .Topbar{
   background-color: cornflowerblue;
   display: flex;
-  justify-content: space-between;
   width: 100%;
   align-items: center;
   
@@ -17,6 +16,7 @@
   margin-left: 20px;
   align-items: center;
   margin-bottom: 10px;
+  width: 246px;
 }
 .alterar-dia{
   display: flex;
@@ -45,6 +45,14 @@
 .dias svg{
   font-size: 1.5em;
   cursor: pointer;
+}
+.conteudo-topbar{
+  display: flex;
+  margin-top: 10px;
+  align-items: center;
+  margin-bottom: 10px;
+  width: inherit;
+  justify-content: flex-start;
 }
 
 .Corpo{

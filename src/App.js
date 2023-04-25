@@ -176,15 +176,17 @@ class Calendario extends Component {
                 <TfiAgenda/>
                 <label className='item-agenda' htmlFor="Agenda">Agenda</label>
             </div>
-            <div className='alterar-dia'>    
-                <ul className='dias'>
-                  <li><button >Hoje</button></li>
-                  <li id='Dia Anterior' title='Dia anterior'><TfiAngleLeft/></li>
-                  <li id='Proximo dia'title='Próximo dia'><TfiAngleRight/></li>
-                  </ul>
-            </div>
+            <div className='conteudo-topbar'>
             <div className='data-atual'>
             <label>{this.state.dia} de {this.meses[this.state.mes] } de {this.state.ano} </label>                                             
+            </div>
+            <div className='alterar-dia'>    
+                <ul className='dias'>                  
+                  <li id='Dia Anterior' title='Dia anterior'><TfiAngleLeft/></li>
+                  <li id='Proximo dia'title='Próximo dia'><TfiAngleRight/></li>
+                  <li><button >Hoje</button></li>
+                  </ul>
+            </div>
             </div>
             </div>
 
