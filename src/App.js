@@ -4,11 +4,12 @@ import './App.css';
 import { TfiAgenda } from "react-icons/tfi";
 import { TfiAngleLeft } from "react-icons/tfi";
 import { TfiAngleRight } from "react-icons/tfi";
+import ReactCalendar from './components/calendar';
 class Calendario extends Component {
   horasDoDia = [...Array(24).keys()];
   datas = [];
   diaSelecionado = 0;
-
+  calendar = new ReactCalendar(this.changeDate);
   constructor(props) {
     super(props);
     const data = new Date();
@@ -31,14 +32,21 @@ class Calendario extends Component {
 
   }
 
-  selecionarDia(event) {
+  // selecionarDia(event) {
 
-    setTimeout(() => {
-      this.diaSelecionado = parseInt(event.target.textContent);
-      console.log(this.diaSelecionado)
-    }, 2000)
-  }
+  //   setTimeout(() => {
+  //     this.diaSelecionado = parseInt(event.target.textContent);
+  //     console.log(this.diaSelecionado)
+  //   }, 2000)
+  // }
+  changeDate(date) {
+    this.setState({
+      ano : date.getFullYear(),
+      mes: date.getMonth(),
+      dia: date.getDate()
+    })
 
+}
 
   renderMes() {
     const { mes, ano } = this.state;
@@ -286,8 +294,8 @@ class Calendario extends Component {
             </div>
 
 
-
-            {this.renderMes()}
+            {this.calendar.CreateCalendar()}
+            {/* {this.renderMes()} */}
           </div>
 
           {this.TabelaEventos()}
