@@ -5,6 +5,7 @@ import { TfiAgenda } from "react-icons/tfi";
 import { TfiAngleLeft } from "react-icons/tfi";
 import { TfiAngleRight } from "react-icons/tfi";
 import ReactCalendar from './components/calendar';
+import Calendar from 'react-calendar';
 class Calendario extends Component {
   horasDoDia = [...Array(24).keys()];
   datas = [];
@@ -17,6 +18,7 @@ class Calendario extends Component {
       mes: data.getMonth(),
       ano: data.getFullYear(),
       dia: data.getDate(),
+      currentDate: new Date(),
       dialog: false
 
     };
@@ -25,12 +27,35 @@ class Calendario extends Component {
       mes: hoje.getMonth(),
       ano: hoje.getFullYear(),
       dia: hoje.getDate(),
-      dialog: false
+      
 
     };
     this.meses = ["Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho", "Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro"];
 
   }
+  CreateCalendar() {
+    return (
+        <div className="app">
+            <div className="calendar-container">
+                <Calendar onChange={(event) => {
+                    let newDate = this.changeDateCalendar(event);
+                    this.state.currentDate.setFullYear(newDate[0], newDate[1], newDate[2]);
+                    this.changeDate(this.state.currentDate);
+
+                }} value={this.state.currentDate} />
+            </div>
+            <div className="text-center">
+                Selected date: {this.state.currentDate.toDateString()}
+            </div>
+        </div>
+    )
+
+}
+changeDateCalendar(state) {
+
+  return [state.getFullYear(), state.getMonth(), state.getDate()]
+
+}
 
   // selecionarDia(event) {
 
@@ -108,10 +133,13 @@ class Calendario extends Component {
     this.setState({
       mes: this.periodo.mes,
       ano: this.periodo.ano,
-      dia: this.periodo.dia
+      dia: this.periodo.dia,
+      currentDate: new Date(),
+      
+      
 
     })
-
+    window.location.reload()
   }
 
   AtualizaData(tipo, operacao) {
@@ -256,15 +284,10 @@ class Calendario extends Component {
           </div>
           <div className='conteudo-topbar'>
             <div className='data-atual'>
-              <label>{this.state.dia} de {this.meses[this.state.mes]} de {this.state.ano} </label>
+              <label>{this.periodo.dia} de {this.meses[this.periodo.mes]} de {this.periodo.ano} </label>
+              <button className='botao-hoje' type='default' onClick={this.voltaHoje}>Hoje</button>
             </div>
-            <div className='alterar-dia'>
-              <ul className='dias'>
-                <li id='Dia Anterior' title='Dia anterior' onClick={() => this.AtualizaData("dia", "subtrai")}><TfiAngleLeft /></li>
-                <li id='Proximo dia' title='Próximo dia' onClick={() => this.AtualizaData("dia", "soma")}><TfiAngleRight /></li>
-                <li><button className='botao-hoje' type='default' onClick={this.voltaHoje}>Hoje</button></li>
-              </ul>
-            </div>
+            
           </div>
         </div>
 
@@ -277,25 +300,9 @@ class Calendario extends Component {
             <div className='botao-criar'>
               <button type='default' onClick={() => { this.handleOpen() }}>Criar</button>
             </div>
-            <div className='alterar-data'>
-              <label>{this.meses[this.state.mes]}</label>
-              <ul className='mes' >
-                <li id='mes anterior' title='Mês anterior' onClick={() => this.AtualizaData("mes", "subtrai")}><TfiAngleLeft /></li>
-                <li id='proximo mes' title='Próximo mês' onClick={() => this.AtualizaData("mes", "soma")}><TfiAngleRight /></li>
-              </ul>
-            </div>
-            <div className='alterar-data'>
-              <label>{this.state.ano}</label>
-
-              <ul className='ano'>
-                <li id='ano anterior' title='Ano anterior' onClick={() => this.AtualizaData("ano", "subtrai")}><TfiAngleLeft /></li>
-                <li id='proximo ano' title='Próximo ano' onClick={() => this.AtualizaData("ano", "soma")}><TfiAngleRight /></li>
-              </ul>
-            </div>
-
-
-            {this.calendar.CreateCalendar()}
-            {/* {this.renderMes()} */}
+            
+            {this.CreateCalendar()}
+          
           </div>
 
           {this.TabelaEventos()}
