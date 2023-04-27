@@ -2,8 +2,6 @@ import React, { Component } from 'react';
 import TaskForm from './components/form';
 import './App.css';
 import { TfiAgenda } from "react-icons/tfi";
-import { TfiAngleLeft } from "react-icons/tfi";
-import { TfiAngleRight } from "react-icons/tfi";
 import ReactCalendar from './components/calendar';
 import Calendar from 'react-calendar';
 class Calendario extends Component {
