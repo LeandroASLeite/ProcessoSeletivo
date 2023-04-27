@@ -42,8 +42,13 @@ class Calendario extends Component {
 
                 }} value={this.state.currentDate} />
             </div>
+            {/* <div className="text-center">
+                Selected date: {this.state.currentDate.toDateString()}
+
+            </div> */}
             <div className="text-center">
                 Selected date: {this.state.currentDate.toDateString()}
+
             </div>
         </div>
     )
@@ -251,8 +256,10 @@ changeDateCalendar(state) {
 
       <div className='tabela'>
 
-
-        <div className='horas'>
+        <div className='selectedDate'> {this.state.currentDate.getDate() }
+        </div>
+          <div className='events'>
+            <div className='horas'>
           {this.horasDoDia.map((horario) => (
             <div className='linhas'> {horario}:00</div>
           ))}
@@ -260,10 +267,10 @@ changeDateCalendar(state) {
 
         <div className='eventos'>
           {this.horasDoDia.map((horario) => (
-            <div className='linhas'>{parametro}</div>
+            <div className='linhas'>{parametro}rozetaaaaa</div>
           ))}
         </div>
-
+        </div>
 
       </div>
 
