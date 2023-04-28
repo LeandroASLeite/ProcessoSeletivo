@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import TaskForm from './components/form';
 import './App.css';
 import { TfiAgenda } from "react-icons/tfi";
+import { AiOutlineClose } from "react-icons/ai";
 import ReactCalendar from './components/calendar';
 import Calendar from 'react-calendar';
 class Calendario extends Component {
@@ -315,9 +316,13 @@ changeDateCalendar(state) {
           <div className="dialog-overlay">
             {dialog && (
               <div className="dialog">
+                <div>
+                  <label>Tarefa</label>
+                  <AiOutlineClose onClick={this.handleClose}/></div>
                 <div className="dialog-content">
+                  
                   <TaskForm />
-                  <button onClick={this.handleClose}>Fechar Diálogo</button>
+                  
                 </div>
               </div>
             )}

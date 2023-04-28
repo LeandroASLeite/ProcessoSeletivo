@@ -1,27 +1,40 @@
-exports.test = function (req, res) {
-    res.send("Olá! Teste ao Controller");
-  };
-// TODO: listar pontos de interesse da BD
-exports.details = function (req, res) {
-  res.send({type: "GET"});
-};
-// TODO: adicionar novo ponto de interesse
-exports.add = function (req, res) {
-  res.send({type: "POST"});
-};
-// TODO: atualizar ponto de interesse
-exports.update = function (req, res) {
-  res.send({type: "PUT"});
-};
-// TODO: apagar ponto de interesse
-exports.delete = function (req, res) {
-  res.send({type: "DELETE"});
+const Calendar = require('../models/CalendarModel');
+
+exports.create = function (req, res, next) {
+  Calendar.create(req.body).then(function (calendar) {
+    res.send(calendar);
+  }).catch(next);
 };
 
-exports.create = function (req, res) {
+exports.delete = function (req, res, next) {
 
-  res.send({
-   type: "POST",
-   name: req.body.name,
-   rank: req.body.rank });
+  Calendar.findByIdAndRemove({ _id: req.params.id }).then(function (calendar) {
+    res.send(calendar);
+  }).catch(next);
+};
+
+exports.read = function (req, res) {
+  Calendar.find({}).then(function (calendar) {
+    res.send(calendar);
+  });
+};
+exports.readTime = function (req, res) {
+  Calendar.find({
+    startDate: {
+      $gte: new Date(req.body.startDate)   
+    },finishDate: {
+      $lte: new Date(req.body.finishDate)    }
+  }).then(function (calendar) {
+    res.send(calendar);
+  });
+
+
+};
+
+
+
+exports.update = function (req, res, next) {
+  Calendar.findByIdAndUpdate({ _id: req.params.id }, req.body).then(function (calendar) {
+    res.send(calendar);
+  }).catch(next);
 };

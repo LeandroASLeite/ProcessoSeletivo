@@ -4,17 +4,16 @@ const router = express.Router();
 // "../controllers/apiController"
 const apiController = require("../controllers/apiController");
 // url do teste será: http://localhost:5000/api/teste
-router.get("/teste", apiController.test);
 module.exports = router;
-
 // url do teste será: http://localhost:5000/api/teste
-router.get("/teste", apiController.test);
+
 // TODO: listar pontos de interesse da BD
-router.get("/details",apiController.details);
+router.get("/read",apiController.read);
+router.get("/readTime",apiController.readTime);
 // TODO: adicionar novo ponto de interesse
-router.post("/interest",apiController.create);
+router.post("/create",apiController.create);
 // TODO: atualizar ponto de interesse
-router.put("/interest/:id",apiController.update);
+router.put("/update/:id",apiController.update);
 // TODO: apagar ponto de interesse
-router.delete("/interest/:id",apiController.delete);
+router.delete("/delete/:id",apiController.delete);
 module.exports = router;
