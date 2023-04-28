@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import TaskForm from './components/form';
 import './App.css';
-import { TfiAgenda } from "react-icons/tfi";
+import { FcCalendar, FcUndo, FcEmptyTrash, FcPlus, FcHighPriority } from "react-icons/fc";
 import { AiOutlineClose } from "react-icons/ai";
 import ReactCalendar from './components/calendar';
 import Calendar from 'react-calendar';
@@ -26,7 +26,7 @@ class Calendario extends Component {
       mes: hoje.getMonth(),
       ano: hoje.getFullYear(),
       dia: hoje.getDate(),
-      
+
 
     };
     this.meses = ["Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho", "Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro"];
@@ -34,48 +34,34 @@ class Calendario extends Component {
   }
   CreateCalendar() {
     return (
-        <div className="app">
-            <div className="calendar-container">
-                <Calendar onChange={(event) => {
-                    let newDate = this.changeDateCalendar(event);
-                    this.state.currentDate.setFullYear(newDate[0], newDate[1], newDate[2]);
-                    this.changeDate(this.state.currentDate);
+      <div className="app">
+        <div className="calendar-container">
+          <Calendar onChange={(event) => {
+            let newDate = this.changeDateCalendar(event);
+            this.state.currentDate.setFullYear(newDate[0], newDate[1], newDate[2]);
+            this.changeDate(this.state.currentDate);
 
-                }} value={this.state.currentDate} />
-            </div>
-            {/* <div className="text-center">
-                Selected date: {this.state.currentDate.toDateString()}
-
-            </div> */}
-            <div className="text-center">
-                Selected date: {this.state.currentDate.toDateString()}
-
-            </div>
+          }} value={this.state.currentDate} />
         </div>
+
+      </div>
     )
 
-}
-changeDateCalendar(state) {
+  }
+  changeDateCalendar(state) {
 
-  return [state.getFullYear(), state.getMonth(), state.getDate()]
+    return [state.getFullYear(), state.getMonth(), state.getDate()]
 
-}
+  }
 
-  // selecionarDia(event) {
-
-  //   setTimeout(() => {
-  //     this.diaSelecionado = parseInt(event.target.textContent);
-  //     console.log(this.diaSelecionado)
-  //   }, 2000)
-  // }
   changeDate(date) {
     this.setState({
-      ano : date.getFullYear(),
+      ano: date.getFullYear(),
       mes: date.getMonth(),
       dia: date.getDate()
     })
 
-}
+  }
 
   renderMes() {
     const { mes, ano } = this.state;
@@ -139,8 +125,8 @@ changeDateCalendar(state) {
       ano: this.periodo.ano,
       dia: this.periodo.dia,
       currentDate: new Date(),
-      
-      
+
+
 
     })
     window.location.reload()
@@ -257,20 +243,21 @@ changeDateCalendar(state) {
 
       <div className='tabela'>
 
-        <div className='selectedDate'> {this.state.currentDate.getDate() }
+        <div className='selectedDate'> {this.state.currentDate.getDate()}
         </div>
-          <div className='events'>
-            <div className='horas'>
-          {this.horasDoDia.map((horario) => (
-            <div className='linhas'> {horario}:00</div>
-          ))}
-        </div>
+        <div className='events'>
+          <div className='horas'>
+            {this.horasDoDia.map((horario) => (
+              <div className='linhas'> {horario}:00</div>
+            ))}
+          </div>
 
-        <div className='eventos'>
-          {this.horasDoDia.map((horario) => (
-            <div className='linhas'>{parametro}rozetaaaaa</div>
-          ))}
-        </div>
+          <div className='eventos'>
+            {this.horasDoDia.map((horario) => (
+              <div className='linhas'>
+                <div>{parametro}rozetaaaaa</div><div><FcUndo title="editar" /><FcEmptyTrash title='excluir' /></div></div>
+            ))}
+          </div>
         </div>
 
       </div>
@@ -285,15 +272,16 @@ changeDateCalendar(state) {
 
         <div className='Topbar'>
           <div className='agenda'>
-            <TfiAgenda />
-            <label className='item-agenda' htmlFor="Agenda">Agenda</label>
+            < FcCalendar />
+            <label className='dataTopbar' htmlFor="Agenda">Agenda</label>
           </div>
           <div className='conteudo-topbar'>
             <div className='data-atual'>
-              <label>{this.periodo.dia} de {this.meses[this.periodo.mes]} de {this.periodo.ano} </label>
-              <button className='botao-hoje' type='default' onClick={this.voltaHoje}>Hoje</button>
+              <label className='dataTopbar' htmlFor="Agenda">{this.state.currentDate.getDate()} de {this.meses[this.state.currentDate.getMonth()]} de {this.state.currentDate.getFullYear()}</label>
+
+              <button type='default' onClick={this.voltaHoje}>Hoje</button>
             </div>
-            
+
           </div>
         </div>
 
@@ -302,13 +290,12 @@ changeDateCalendar(state) {
         <div className='Corpo'>
 
           <div className='Sidebar'>
-            <label>Calendário</label>
             <div className='botao-criar'>
-              <button type='default' onClick={() => { this.handleOpen() }}>Criar</button>
+              <button type='default' onClick={() => { this.handleOpen() }}><FcPlus style={{ alignContent: "center" }} /> Criar evento</button>
             </div>
-            
+
             {this.CreateCalendar()}
-          
+
           </div>
 
           {this.TabelaEventos()}
@@ -316,13 +303,13 @@ changeDateCalendar(state) {
           <div className="dialog-overlay">
             {dialog && (
               <div className="dialog">
-                <div>
-                  <label>Tarefa</label>
-                  <AiOutlineClose onClick={this.handleClose}/></div>
+                <div className='tableAction'>
+                  <label >Tarefa</label>
+                  <FcHighPriority title='cancelar' onClick={this.handleClose} /></div>
                 <div className="dialog-content">
-                  
+
                   <TaskForm />
-                  
+
                 </div>
               </div>
             )}

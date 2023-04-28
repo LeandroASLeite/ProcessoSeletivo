@@ -1,11 +1,13 @@
 * {
   margin: 0;
   padding: 0;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+
 }
 
 /* parte da Topbar */
 .Topbar {
-  background-color: cornflowerblue;
+  background: linear-gradient(180deg, #729FF7 0%, #5C6D84 100%);
   display: flex;
   width: 100%;
   align-items: center;
@@ -14,11 +16,9 @@
 
 .agenda {
   display: flex;
-  margin-top: 10px;
-  margin-left: 20px;
+  width: 23%;
   align-items: center;
-  margin-bottom: 10px;
-  width: 246px;
+  margin-left: 10px;
 }
 
 .alterar-dia {
@@ -26,13 +26,11 @@
 
 }
 
-.data-atual label {
-  margin-bottom: 0;
-  font-weight: bold;
-}
+
 
 .Topbar svg {
-  font-size: 2em;
+  font-size: 3.6em;
+
 
 }
 
@@ -61,11 +59,18 @@
   margin-top: 10px;
   align-items: center;
   margin-bottom: 10px;
-  width: inherit;
+  width: 77%;
   justify-content: flex-start;
 }
 
-dialog svg{
+.dataTopbar {
+  font-size: x-large;
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+
+dialog svg {
   font-size: 2.5em;
   cursor: pointer;
 }
@@ -74,32 +79,40 @@ dialog svg{
   display: flex;
   height: 100vh;
   width: 100%;
-  border-top: 1px solid black;
-}
+  background-color: rgb(200 199 209);
+  }
 
 .Sidebar {
-  
-  text-align: center;
-  width: 25%;
 
+  text-align: center;
+  width: 23%;
+  border-right: 1px solid black;
+}
+
+.Sidebar svg {
+  font-size: 1.3em;
+  cursor: pointer;
+  align-content: baseline;
 }
 
 .tabela {
-  width: 100%;
+  width: 77%;
   height: 100%;
   display: flex;
   flex-direction: column;
-
-
 }
-.events{
+
+
+
+.events {
   display: flex;
-    background-color: grey;
-    border-radius: 20px;
-    height: 95%;
-    border: 1px solid;
-    margin-left: 10px;
+  background-color: grey;
+  border-radius: 20px;
+  height: 95%;
+  border: 1px solid;
+  margin-left: 10px;
 }
+
 /* parte da sidebar */
 .mes {
   display: flex;
@@ -137,29 +150,44 @@ dialog svg{
 }
 
 .botao-criar {
+  margin-top: 20px;
   margin-bottom: 10px;
 
 }
 
-.botao-hoje {
-  width: 50px !important;
+.botaoHoje {
+  background: #40AFFF;
+  border-radius: 20px;
+  color: #FFFFFF;
+  font-family: Arial;
+  font-size: unset;
+  padding: 5px;
+  border: solid #337FED 1px;
+  text-decoration: none;
+  display: inline-block;
+  cursor: pointer;
+  text-align: center;
 }
+
+.botaoHoje:hover {
+  border: solid #000000 1px;
+  background: #1E62D0;
+  border-radius: 20px;
+  text-decoration: unset;
+}
+
 
 /* parte do corpo */
-.selectedDate{
-  background-color: rgb(31, 106, 245);
-  width: max-content;
-  min-width: 69px;
-  border-radius: 30%;
+.selectedDate {
+  background-color: #3c00ff;
+  min-width: 60px;
+  min-height: 60px;
+  border-radius: 50%;
   display: flex;
-  align-items: center;
-  justify-content: center;
-  align-content: center;
-  flex-wrap: wrap;
-  height: 10%;
   font-size: -webkit-xxx-large;
-  margin-bottom: 10px;
-  margin-top: 10px;
+  margin: 10px;
+  width: max-content;
+  justify-content: center;
 }
 
 .horas {
@@ -185,8 +213,9 @@ dialog svg{
   height: 24%;
   display: flex;
   flex-wrap: nowrap;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
+
 }
 
 
@@ -216,11 +245,7 @@ form {
   }
 }
 
-label {
-  display: block;
-  margin-bottom: 0.5rem;
-  font-weight: bold;
-}
+
 
 input[type='text'],
 input[type='date'],
@@ -245,18 +270,34 @@ form h1 {
 }
 
 button[type='default'] {
-  width: 100px;
-  padding: 10px;
-  background-color: rgb(31, 106, 245);
-  color: #fff;
-  border: none;
-  border-radius: 10px;
-  cursor: pointer;
+  text-decoration: none;
+  font-size: 19.2px;
+  color: #FFFFFF;
+  font-family: "Roboto Mono", monospace;
+  background: linear-gradient(to bottom, #4404FF, #6B6DD0);
+  border-radius: 5px;
+  padding: 8.7px;
+  transition: all 0.15s ease;
+  border: unset;
+  display: inline-flex;
+  align-items: center;
 
 }
 
-button[type='submit']:hover {
-  background-color: rgb(4, 50, 134);
+.tableAction {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: nowrap;
+  flex-direction: row;
+  align-items: center;
+  background-color: cornflowerblue;
+  color: white;
+  
+}
+
+button[type='default']:hover {
+  background: linear-gradient(to bottom, #6B6DD0, #335AD0);
+  border: unset;
 }
 
 
