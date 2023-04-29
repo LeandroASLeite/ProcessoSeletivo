@@ -9,7 +9,7 @@ module.exports = router;
 
 // TODO: listar pontos de interesse da BD
 router.get("/read",apiController.read);
-router.get("/readTime",apiController.readTime);
+router.post("/readTime",apiController.readTime);
 // TODO: adicionar novo ponto de interesse
 router.post("/create",apiController.create);
 // TODO: atualizar ponto de interesse

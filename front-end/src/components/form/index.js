@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
-
+import Routes from '../../routes/routes';
 
 function TaskForm() {
+  
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
   const [date, setDate] = useState('');
@@ -42,10 +43,11 @@ function TaskForm() {
     setParticipants(event.target.value);
   };
 
-  return (
-    
+  return (        
     <form onSubmit={handleSubmit}>
+      
       <div>
+        
         <label htmlFor="title">Título *</label>
         <input
           type="text"
@@ -98,13 +100,14 @@ function TaskForm() {
       <div>
         <label htmlFor="duration">Duração *</label>
         <input
-          type="text"
+          type="time"
           id="duration"
           name="duration"
           value={duration}
           onChange={handleDurationChange}
           required
         />
+        {/* todo separar as horas  */}
       </div>
 
       <div>
@@ -129,11 +132,32 @@ function TaskForm() {
         />
       </div>
 
-      <button type="default">Criar tarefa</button>
+      <button type="default" onClick={() => {Submit(title,description,date,time,duration,location,participants)}}>Criar tarefa</button>
     </form>
     
   );
 
+}
+function Submit(title,description,date,startDate,finishDate,locate,invite){
+  let formatedStartDate = date + "T" + startDate + ":00.000Z"
+  let formatedFinishDate = date + "T" + finishDate + ":00.000Z"
+  const route = new Routes();
+ 
+  
+  route.createData(
+    {
+      
+      "title": title,
+      "description": description,
+      "date": date,
+      "startDate": formatedStartDate,
+      "finishDate": formatedFinishDate,
+      "locate": locate,
+      "invite": invite
+      
+    }
+  )
+  
 }
 
 export default TaskForm;

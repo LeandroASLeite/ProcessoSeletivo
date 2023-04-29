@@ -28,10 +28,7 @@ exports.readTime = function (req, res) {
     res.send(calendar);
   });
 
-
 };
-
-
 
 exports.update = function (req, res, next) {
   Calendar.findByIdAndUpdate({ _id: req.params.id }, req.body).then(function (calendar) {

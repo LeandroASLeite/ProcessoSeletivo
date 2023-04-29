@@ -1,6 +1,9 @@
-
+const cors = require('cors');
 const express = require('express');
 const app = express();
+app.use(cors({
+  origin: ['http://localhost:3000']
+}));
 let port = 5000;
 app.listen(process.env.port || port, () =>{
   console.log('Servidor em execução no porto: '+ port);
