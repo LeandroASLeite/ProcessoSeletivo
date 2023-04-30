@@ -157,7 +157,7 @@ function Submit(title,description,date,startDate,finishDate,locate,invite){
       
     }
   )
-  
+  window.location.reload()
 }
 
 export default TaskForm;

@@ -7,8 +7,7 @@ import Routes from './routes/routes';
 import ReactCalendar from './components/calendar';
 import Calendar from 'react-calendar';
 
-
-
+var selectedDate = undefined
 class Calendario extends Component {
 
   datas = [];
@@ -67,8 +66,9 @@ class Calendario extends Component {
       ano: date.getFullYear(),
       mes: date.getMonth(),
       dia: date.getDate()
-    })
 
+    })
+    selectedDate = this.state
   }
 
 
@@ -79,43 +79,15 @@ class Calendario extends Component {
       ano: this.periodo.ano,
       dia: this.periodo.dia,
       currentDate: new Date(),
-
-
-
-
     })
-
+    selectedDate = this.state
+    console.log(selectedDate)
     window.location.reload()
 
   }
 
-  TabelaEventos(parametro) {
-    //   const eventList = this.routes.getEvent()
-    //   console.log(this.variavel)
-    //   const { data, error, isPending } = useAsync({ promiseFn: loadPlayer, playerId: 1 })
-    // if (isPending) return "Loading..."
-    // if (error) return `Something went wrong: ${error.message}`
-    // if (data)
-    //   return (
-    //     <div>
-    //       <strong>Player data:</strong>
-    //       <pre>{JSON.stringify(data, null, 2)}</pre>
-    //     </div>
-    //   )
+  TabelaEventos() {
 
-
-    //   eventList.then(function(result) {
-    //     console.log(result)
-    //     this.variavel = result
-    //   console.log(this.variavel)
-
-    //   this.setState({eventList:result})
-
-    //   }).catch(function(error) {
-    //     // lida com o erro da Promise
-    //   });
-
-    //   // console.log(this.state)
     const horasDoDia = [...Array(24).keys()]
     return (
       <div className='tabela'>
@@ -142,15 +114,17 @@ class Calendario extends Component {
 
   handleOpen = () => {
     this.setState({ dialog: true });
+    selectedDate = this.state;
 
   }
   handleClose = () => {
     this.setState({ dialog: false });
+    selectedDate = this.state;
   }
 
   render() {
 
-
+    selectedDate = this.state
     const { dialog } = this.state;
     // this.routes.getBackendData()
     return (
@@ -217,7 +191,7 @@ function Eventos() {
   const [eventItems, setEvents] = useState([])
   const routes = new Routes()
   useEffect(() => {
-    routes.getEvent()
+    routes.getEvent(selectedDate)
       .then((res) => {
         setEvents(res)
       })
@@ -225,20 +199,19 @@ function Eventos() {
         console.log(e.message)
       })
   }, [])
-  console.log(eventItems)
   return horasDoDia.map((horario) => {
     let eventName = ""
     eventItems.forEach((item) => {
-      
+
       if (parseInt(item.startDate.substring(11, 13)) === horario) {
         eventName = item.title
-        console.log(item)
       }
     })
     return (
-    <div className='linhas'>
-      <div>{}</div>{eventName}<div><FcUndo title="editar" /><FcEmptyTrash title='excluir' /></div></div>
-  )})
+      <div className='linhas'>
+        <div>{ }</div>{eventName}<div><FcUndo title="editar" /><FcEmptyTrash title='excluir' /></div></div>
+    )
+  })
 
 }
 
