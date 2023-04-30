@@ -8,7 +8,7 @@ class Routes {
 
     async getEvent() {
 
-        const data = { startDate: '2021-04-21T01:00:00.000Z', finishDate: '2023-04-28T01:01:00.000Z' };
+        const data = { startDate: '2021-04-21T01:00:00.000Z', finishDate: '2023-04-30T23:01:00.000Z' };
         const requestOptions = {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },

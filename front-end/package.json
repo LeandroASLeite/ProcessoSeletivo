@@ -9,6 +9,7 @@
     "fetch": "^1.1.0",
     "modal": "^1.2.0",
     "react": "^18.2.0",
+    "react-async": "^10.0.1",
     "react-calendar": "^4.2.1",
     "react-dom": "^18.2.0",
     "react-icons": "^4.8.0",
