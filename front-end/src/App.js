@@ -2,12 +2,13 @@ import React, { Component, useState, useEffect } from 'react';
 // import { useAsync } from "react-async"
 import TaskForm from './components/form';
 import './App.css';
-import { FcCalendar, FcUndo, FcEmptyTrash, FcPlus, FcHighPriority } from "react-icons/fc";
+import { FcCalendar, FcEmptyTrash, FcPlus, FcHighPriority } from "react-icons/fc";
 import Routes from './routes/routes';
 import ReactCalendar from './components/calendar';
 import Calendar from 'react-calendar';
 
 var selectedDate = undefined
+var allEvents = undefined
 class Calendario extends Component {
 
   datas = [];
@@ -185,7 +186,12 @@ class Calendario extends Component {
   }
 }
 
+function deleteItem(event){
+  const routes = new Routes();
+  routes.deleteData(event?._id);
+  window.location.reload();
 
+}
 function Eventos() {
   const horasDoDia = [...Array(24).keys()]
   const [eventItems, setEvents] = useState([])
@@ -200,16 +206,16 @@ function Eventos() {
       })
   }, [])
   return horasDoDia.map((horario) => {
-    let eventName = ""
+    let event = undefined 
     eventItems.forEach((item) => {
 
       if (parseInt(item.startDate.substring(11, 13)) === horario) {
-        eventName = item.title
+        event = item
       }
     })
     return (
       <div className='linhas'>
-        <div>{ }</div>{eventName}<div><FcUndo title="editar" /><FcEmptyTrash title='excluir' /></div></div>
+        <div>{ }</div>{event?.title}<div><FcEmptyTrash onClick={()=>{deleteItem(event)}} title='excluir' /></div></div>
     )
   })
 
