@@ -1,5 +1,4 @@
 // import { useState } from 'react';
-import Calendar from 'react-calendar';
 import './style.css';
 
 
@@ -29,18 +28,19 @@ class ReactCalendar {
     CreateCalendar() {
         return (
             <div className="app">
-                <h1 className="header">React Calendar</h1>
+                {/* <h1 className="header">React Calendar</h1>
                 <div className="calendar-container">
                     <Calendar onChange={(event) => {
                         let newDate = this.changeDate(event);
                         this.state.currentDate.setFullYear(newDate[0], newDate[1], newDate[2]);
                         this.setExternalDate(this.state.currentDate);
+                        window.location.reload();
 
                     }} value={this.state.currentDate} />
                 </div>
                 <div className="text-center">
                     Selected date: {this.state.currentDate.toDateString()}
-                </div>
+                </div> */}
             </div>
         )
 

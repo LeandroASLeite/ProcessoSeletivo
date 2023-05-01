@@ -8,7 +8,7 @@ import ReactCalendar from './components/calendar';
 import Calendar from 'react-calendar';
 
 var selectedDate = undefined
-var allEvents = undefined
+
 class Calendario extends Component {
 
   datas = [];
@@ -19,6 +19,7 @@ class Calendario extends Component {
   constructor(props) {
     super(props);
     const data = new Date();
+
     this.state = {
       mes: data.getMonth(),
       ano: data.getFullYear(),
@@ -27,7 +28,10 @@ class Calendario extends Component {
       dialog: false,
       eventList: []
 
-    };
+    }
+    this.getStorageData();
+
+    ;
     const hoje = new Date();
     this.variavel = undefined
     this.periodo = {
@@ -48,6 +52,7 @@ class Calendario extends Component {
             let newDate = this.changeDateCalendar(event);
             this.state.currentDate.setFullYear(newDate[0], newDate[1], newDate[2]);
             this.changeDate(this.state.currentDate);
+            window.location.reload()
 
           }} value={this.state.currentDate} />
         </div>
@@ -63,26 +68,25 @@ class Calendario extends Component {
   }
 
   changeDate(date) {
-    this.setState({
+    this.setStorageDate({
       ano: date.getFullYear(),
       mes: date.getMonth(),
-      dia: date.getDate()
+      dia: date.getDate(),
+      currentDate: date
 
     })
     selectedDate = this.state
   }
 
-
-
   voltaHoje = () => {
-    this.setState({
+    this.setStorageDate({
       mes: this.periodo.mes,
       ano: this.periodo.ano,
       dia: this.periodo.dia,
       currentDate: new Date(),
     })
     selectedDate = this.state
-    console.log(selectedDate)
+
     window.location.reload()
 
   }
@@ -121,6 +125,53 @@ class Calendario extends Component {
   handleClose = () => {
     this.setState({ dialog: false });
     selectedDate = this.state;
+  }
+  getStorageData() {
+    const data = new Date();
+
+    const selectedDate = JSON.parse(localStorage.getItem("data"));
+    // console.log(selectedDate.currentDate)
+    if (selectedDate) {
+      selectedDate.currentDate = new Date(selectedDate.currentDate);
+      // selectedDate.mes =selectedDate.currentDate.getMonth();
+      // selectedDate.dia=selectedDate.currentDate.getDate();
+      // selectedDate.ano=selectedDate.currentDate.getFullYear();
+
+      console.log(selectedDate)
+      this.state.mes = selectedDate.mes;
+      this.state.ano = selectedDate.ano;
+      this.state.dia = selectedDate.dia;
+      this.state.currentDate = selectedDate.currentDate;
+
+
+      console.log(this.state)
+
+    }
+
+    else {
+      console.log("caiu no else")
+      this.setState({
+        mes: data.getMonth(),
+        ano: data.getFullYear(),
+        dia: data.getDate(),
+        currentDate: new Date(),
+        dialog: false,
+        eventList: []
+
+      })
+    }
+
+    console.log(this.state)
+
+
+  }
+  setStorageDate(newState) {
+    this.state.dia = newState.dia
+    this.state.mes = newState.mes
+    this.state.ano = newState.ano
+    this.state.currentDate = newState.currentDate
+    console.log(this.state)
+    localStorage.setItem("data", JSON.stringify(this.state));
   }
 
   render() {
@@ -186,7 +237,7 @@ class Calendario extends Component {
   }
 }
 
-function deleteItem(event){
+function deleteItem(event) {
   const routes = new Routes();
   routes.deleteData(event?._id);
   window.location.reload();
@@ -206,7 +257,7 @@ function Eventos() {
       })
   }, [])
   return horasDoDia.map((horario) => {
-    let event = undefined 
+    let event = undefined
     eventItems.forEach((item) => {
 
       if (parseInt(item.startDate.substring(11, 13)) === horario) {
@@ -215,7 +266,7 @@ function Eventos() {
     })
     return (
       <div className='linhas'>
-        <div>{ }</div>{event?.title}<div><FcEmptyTrash onClick={()=>{deleteItem(event)}} title='excluir' /></div></div>
+        <div>{ }</div>{event?.title}<div><FcEmptyTrash onClick={() => { deleteItem(event) }} title='excluir' /></div></div>
     )
   })
 
