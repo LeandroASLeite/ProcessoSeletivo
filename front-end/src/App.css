@@ -121,6 +121,7 @@
   flex-direction: column;
   text-align: center;
   width: 15%;
+  
 }
 
 .eventos {
@@ -139,6 +140,7 @@
   flex-wrap: nowrap;
   justify-content: space-between;
   align-items: center;
+  
 
 }
 

@@ -130,26 +130,23 @@ class Calendario extends Component {
     const data = new Date();
 
     const selectedDate = JSON.parse(localStorage.getItem("data"));
-    // console.log(selectedDate.currentDate)
+  
     if (selectedDate) {
       selectedDate.currentDate = new Date(selectedDate.currentDate);
-      // selectedDate.mes =selectedDate.currentDate.getMonth();
-      // selectedDate.dia=selectedDate.currentDate.getDate();
-      // selectedDate.ano=selectedDate.currentDate.getFullYear();
 
-      console.log(selectedDate)
+
       this.state.mes = selectedDate.mes;
       this.state.ano = selectedDate.ano;
       this.state.dia = selectedDate.dia;
       this.state.currentDate = selectedDate.currentDate;
 
 
-      console.log(this.state)
+
 
     }
 
     else {
-      console.log("caiu no else")
+  
       this.setState({
         mes: data.getMonth(),
         ano: data.getFullYear(),
@@ -161,7 +158,7 @@ class Calendario extends Component {
       })
     }
 
-    console.log(this.state)
+
 
 
   }
@@ -170,7 +167,7 @@ class Calendario extends Component {
     this.state.mes = newState.mes
     this.state.ano = newState.ano
     this.state.currentDate = newState.currentDate
-    console.log(this.state)
+
     localStorage.setItem("data", JSON.stringify(this.state));
   }
 
@@ -266,7 +263,7 @@ function Eventos() {
     })
     return (
       <div className='linhas'>
-        <div>{ }</div>{event?.title}<div><FcEmptyTrash onClick={() => { deleteItem(event) }} title='excluir' /></div></div>
+        <div>{ }</div><div>{event?.title}</div><div>{event?.description}</div><div>{event?.locate}</div><div><FcEmptyTrash onClick={() => { deleteItem(event) }} title='excluir' /></div></div>
     )
   })
 

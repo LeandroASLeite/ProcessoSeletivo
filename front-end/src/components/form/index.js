@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import Routes from '../../routes/routes';
-
+import emailjs from 'emailjs-com';
 function TaskForm() {
   
   const [title, setTitle] = useState('');
@@ -107,7 +107,7 @@ function TaskForm() {
           onChange={handleDurationChange}
           required
         />
-        {/* todo separar as horas  */}
+        
       </div>
 
       <div>
@@ -155,9 +155,23 @@ function Submit(title,description,date,startDate,finishDate,locate,invite){
       "locate": locate,
       "invite": invite
       
-    }
-  )
-  window.location.reload()
+    })
+    const templateParams = {
+      send_to: invite,
+      from_name: title,
+      message : `Descrição: ${description}\nData: ${date}\nComeço: ${formatedStartDate}\nFim: ${formatedFinishDate}\nLocal: ${locate}`
+    };
+    console.log(templateParams)
+    emailjs.send('service_ergo3mj', 'template_qjzbjnb', templateParams, 'iRNSZDxtAiUyFzx6k')
+      .then((result) => {
+        console.log(result);
+        window.location.reload();
+      }, (error) => {
+        console.log(`Erro ao enviar e-mail para ${invite}: ${error}`);
+        window.location.reload();
+      });
+
+   
 }
 
 export default TaskForm;
